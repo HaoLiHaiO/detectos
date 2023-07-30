@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>OS Detector</title>
+        <script type="module" src="main.js"></script>
+    </head>
+    <body>
+        <h1>Device Information</h1>
+        <ul id="deviceInfo">
+        </ul>
+        <script type="module">
+            import { useDevice } from './main.js';
+            window.onload = function() {
+                var deviceState = useDevice();
+                var deviceInfo = document.getElementById("deviceInfo");
+                
+                for (var key in deviceState) {
+                    var value = deviceState[key];
+                    var li = document.createElement("li");
+                    li.textContent = key + ": " + (typeof value === 'function' ? value() : value);
+                    deviceInfo.appendChild(li);
+                }
+            };
+        </script>
+    </body>
+</html>
